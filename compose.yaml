@@ -1,0 +1,16 @@
+services:
+  researcher:
+    build: .
+    init: true
+    ports:
+      - "127.0.0.1:8501:8501"
+    env_file:
+      - .env
+    volumes:
+      # Keep runtime/.gitkeep so the nested volume mountpoint exists in this read-only bind.
+      - .:/app:ro
+      - research_data:/app/runtime
+    restart: unless-stopped
+
+volumes:
+  research_data:
