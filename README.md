@@ -1,8 +1,8 @@
-# 资料调研 Agent · Docker 入门版
+# 资料调研 Agent · Docker 入门版（Day 2）
 
-这是2026-10-21开始的七天项目基线。功能思路参考 [Local Deep Researcher](https://github.com/langchain-ai/local-deep-researcher)，按自己的代码逐步学习模型调用、搜索、原文证据、RAG、状态、MCP与评测。
+这是2026-10-21开始的七天项目第二课。功能思路参考 [Local Deep Researcher](https://github.com/langchain-ai/local-deep-researcher)，本版本用LangGraph的显式State和条件边组织模型决策/工具执行循环。默认只读取五个官方文档站点，代码与测试均在Docker容器内运行。
 
-## 第一天启动
+## 启动与升级
 
 本机准备Docker Desktop并使用Linux容器；不需要在宿主机安装Python、Conda或依赖库。将本目录放在D:\Study\CodeSoft\MyProject\research-agent-lite，用PowerShell进入本目录。
 
@@ -32,22 +32,24 @@ docker compose logs --tail=50 researcher
 
 ## 业务用法
 
-输入：帮我找3份MCP工具调用的官方入门资料，优先modelcontextprotocol.io。
+输入：请阅读Docker官方资料，解释Compose怎样管理多个服务，给两条带原文定位的结论。
 
-可能结果：出现工具实际搜索到的标题、链接和来源ID，标注“仅搜索摘要，待阅读全文核实”；找到不足3条时如实显示实际数量。
+可能结果：search_web找到来源，read_web取得正文节选，finish_report提交包含已读来源ID和原文定位的短报告。首次搜索未取得资料时，模型可改词补查，最多再查两次。范围过宽时使用ask_user澄清。
 
-第一天只定位待阅读来源。完整报告、笔记知识库、任务恢复和MCP将在同一项目逐日加入。
+引用格式和原文定位可由代码检查；结论是否受到证据支持仍须人工验收。个人RAG、报告保存、任务恢复和MCP将在后续加入。旧课已发不表示学习者已经完成。
 
 ## 文件说明
 
 - app.py：网页、API开关、会话历史与执行记录。
-- agent.py：有调用/时间预算的工具循环。
-- tools.py：搜索Schema、参数校验、公开来源整理。
+- agent.py：ResearchState、decide/act图循环、结构化报告校验。
+- agent_day1.py：保留的第一天执行器，用于运行原有回归测试。
+- tools.py：搜索、按来源ID读取、追问、结束报告的工具契约；前两项在此执行。
+- reader.py：精确域名与IP边界、HTTPS正文节选、内容版本。
 - Dockerfile / compose.yaml：容器运行与持久化卷。
-- docs/DAY1.md：第一天完整教材、命令解释、业务输入输出与面试训练。
+- docs/DAY1.md / docs/DAY2.md：两课完整教材，按最新DAY2.md升级；其指令避免覆盖.env和学习日志。
 - docs/SEVEN_DAY_PLAN.md：七天路线、功能范围与最终验收。
 - docs/INTERVIEW_CHECKLIST.md：能力问题、对应日期和证据清单。
-- docs/VALIDATION.md：教材已验证和待验证的实际边界。
+- docs/VALIDATION_DAY2.md：40项工程测试及未验证项。
 - tests：不调用付费API的工程测试。
 
-API开关和页面会话历史暂存在进程内，重启后会清空；命名卷已配置，Day 4才实现任务与报告持久化。当前为个人本机应用，端口仅绑定127.0.0.1。
+API开关、研究State和会话报告暂存在进程内，重启后会清空；命名卷已配置，Day 4才实现任务与报告持久化。当前为个人本机应用，端口仅绑定127.0.0.1。详情、业务用例和独立练习见docs/DAY2.md。

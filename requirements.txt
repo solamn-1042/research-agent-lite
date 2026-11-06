@@ -2,3 +2,5 @@ openai==3.35.1
 streamlit==1.66.0
 python-dotenv==1.2.4
 ddgs==9.16.0
+langgraph==1.2.16
+beautifulsoup4==4.15.0

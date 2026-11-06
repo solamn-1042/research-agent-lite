@@ -7,7 +7,6 @@ services:
     env_file:
       - .env
     volumes:
-      # Keep runtime/.gitkeep so the nested volume mountpoint exists in this read-only bind.
       - .:/app:ro
       - research_data:/app/runtime
     restart: unless-stopped

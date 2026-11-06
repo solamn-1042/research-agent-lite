@@ -1,0 +1,110 @@
+{
+  "answer": "# 测试报告\n- 演示资料描述了多服务配置管理。 [WEB-cd0401a9]\n  原文定位：演示资料说明可以使用配置文件管理多个服务\n\n局限：本报告由离线构造页面生成，只验证工程执行路径。\n\n来源（已读取正文节选）：\n- [WEB-cd0401a9] https://docs.docker.com/compose/ | 2026-10-22T01:00:00+00:00 | 版本 ff48742e1e9f",
+  "status": "COMPLETED",
+  "run_id": "4f4c2671d1a4",
+  "elapsed_ms": 8,
+  "tokens": 60,
+  "events": [
+    {
+      "kind": "model",
+      "step": 1,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "kind": "tool",
+      "tool_call_id": "call_0",
+      "name": "search_web",
+      "arguments": "{\"query\": \"最初的词\"}",
+      "code": "NO_RESULTS",
+      "sources": []
+    },
+    {
+      "kind": "model",
+      "step": 2,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "kind": "tool",
+      "tool_call_id": "call_0",
+      "name": "search_web",
+      "arguments": "{\"query\": \"调整后的关键词\"}",
+      "code": "OK",
+      "sources": [
+        {
+          "id": "WEB-cd0401a9",
+          "title": "测试构造页面",
+          "url": "https://docs.docker.com/compose/",
+          "snippet": "仅定位摘要",
+          "evidence_level": "search_snippet"
+        }
+      ]
+    },
+    {
+      "kind": "model",
+      "step": 3,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "kind": "tool",
+      "tool_call_id": "call_0",
+      "name": "read_web",
+      "arguments": "{\"source_id\": \"WEB-cd0401a9\"}",
+      "code": "OK",
+      "sources": [
+        {
+          "id": "WEB-cd0401a9",
+          "title": "测试构造页面",
+          "url": "https://docs.docker.com/compose/",
+          "snippet": "仅定位摘要",
+          "evidence_level": "page_excerpt",
+          "fetched_at": "2026-10-22T01:00:00+00:00",
+          "version": "ff48742e1e9f0ad9e13c6b3a3dc564b94aaa1364dace8b8972f20b1e74f525f2",
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "kind": "model",
+      "step": 4,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "kind": "tool",
+      "tool_call_id": "call_0",
+      "name": "finish_report",
+      "arguments": "{\"title\": \"测试报告\", \"claims\": [{\"text\": \"演示资料描述了多服务配置管理。\", \"source_id\": \"WEB-cd0401a9\", \"quote\": \"演示资料说明可以使用配置文件管理多个服务\"}], \"limitations\": \"本报告由离线构造页面生成，只验证工程执行路径。\"}",
+      "code": "REPORT_VALIDATED",
+      "sources": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "WEB-cd0401a9",
+      "title": "测试构造页面",
+      "url": "https://docs.docker.com/compose/",
+      "snippet": "仅定位摘要",
+      "evidence_level": "page_excerpt",
+      "text": "演示资料说明可以使用配置文件管理多个服务。这是单元测试构造的页面内容，不是从真实网站抓取的文档。演示资料说明可以使用配置文件管理多个服务。这是单元测试构造的页面内容，不是从真实网站抓取的文档。演示资料说明可以使用配置文件管理多个服务。这是单元测试构造的页面内容，不是从真实网站抓取的文档。演示资料说明可以使用配置文件管理多个服务。这是单元测试构造的页面内容，不是从真实网站抓取的文档。",
+      "fetched_at": "2026-10-22T01:00:00+00:00",
+      "version": "ff48742e1e9f0ad9e13c6b3a3dc564b94aaa1364dace8b8972f20b1e74f525f2",
+      "truncated": false
+    }
+  ],
+  "state": {
+    "model_calls": 4,
+    "search_count": 2,
+    "read_count": 1,
+    "status": "COMPLETED"
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "离线工程演示：无结果后换关键词再阅读并提交报告"
+    },
+    {
+      "role": "assistant",
+      "content": "# 测试报告\n- 演示资料描述了多服务配置管理。 [WEB-cd0401a9]\n  原文定位：演示资料说明可以使用配置文件管理多个服务\n\n局限：本报告由离线构造页面生成，只验证工程执行路径。\n\n来源（已读取正文节选）：\n- [WEB-cd0401a9] https://docs.docker.com/compose/ | 2026-10-22T01:00:00+00:00 | 版本 ff48742e1e9f"
+    }
+  ],
+  "validation_scope": "真实LangGraph执行，模型和网页响应为可控替身；不代表真实模型选工具效果"
+}

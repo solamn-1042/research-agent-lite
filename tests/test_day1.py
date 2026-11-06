@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 from openai import APIError
 from openai.types.chat import ChatCompletion
-from agent import run_turn
+from agent_day1 import run_turn
 from tools import execute_tool, public_url
 
 ROWS = [{"title": "MCP官方文档", "href": "https://modelcontextprotocol.io/docs#intro", "body": "官方说明摘要"}]
@@ -120,7 +120,7 @@ class LoopTests(unittest.TestCase):
         client.chat.completions.create.assert_not_called()
 
     def test_deadline(self):
-        with patch("agent.time.monotonic", side_effect=[0, 61, 61]):
+        with patch("agent_day1.time.monotonic", side_effect=[0, 61, 61]):
             self.assertEqual(run_turn("查资料", [], client_for(), "test")["status"], "DEADLINE")
 
     def test_api_error_does_not_leak(self):
